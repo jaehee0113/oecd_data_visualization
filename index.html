@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title> OECD Analysis </title>
+    <link rel="stylesheet" href="static/dest/css/base.css">
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/dest/js/main.js"></script>
+  </head>
+  <body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 text-center text-uppercase"> 
+            <h3> OECD Migration Data Visualization </h3> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"> 
+        <ul class="tab">
+          <li>
+              <li><a href="#" class="tablinks" onclick="openTabs(event, 'home')">Home</a></li>
+              <li><a href="#" class="tablinks" onclick="openTabs(event, 'graph')">6 Popular Destination</a></li>
+              <li><a href="#" class="tablinks" onclick="openTabs(event, 'map')">Total Inflows By Map</a></li>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+          <div class="col-md-1" id="Barometer" style="display:none;">
+      </div>
+      <div class="col-md-11 tabcontent" id="map">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 tabcontent" id="graph">  
+  </div>
+  <div class="col-md-12 tabcontent default-tab" id="home">
+    <h2> Data Description </h2>
+    <p>
+      The data is gathered from OECD Stat database. In particular, the data is about 'inflows of foreign population by nationality.' The reason why I chose this data was because I am also a migrant. Please enjoy the statistics. Be aware that some countries lack data.
+    </p>
+  </div>
+  <script type="text/javascript">
+    var path = "./data/";
+    loadData(path);
+  </script>
+  </body>
+</html>
