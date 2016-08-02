@@ -14,6 +14,9 @@ function loadData(path){
 
     	draw(oecd_data);
     	drawMap(oecd_data, geo_data, 2000);
+
+    	$(".loadingGIF").hide();
+    	$(".overlay").hide();
     }
 }
 
@@ -23,13 +26,14 @@ function openTabs(evt, dataType){
     // Declare all variables
     var i, tabcontent, tablinks;
 
+    document.getElementById("Barometer").style.display = "none";
+    document.getElementById("home").style.display = "none";
+
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
-
-    document.getElementById("Barometer").style.display = "none";
 
     // Get all elements with class="tablinks" and remove the class "active"
     tablinks = document.getElementsByClassName("tablinks");
