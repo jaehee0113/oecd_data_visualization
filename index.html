@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="static/dest/css/base.css">
     <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
-    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="static/bower_components/dimple/dist/dimple.v2.0.0.min.js"></script>
+    <script src="static/bower_components/d3-queue/d3-queue.js"></script>
     <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="static/dest/js/main.js"></script>
@@ -33,13 +33,17 @@
       </div>
     </div>
     <div class="row">
-          <div class="col-md-1" id="Barometer" style="display:none;">
+      <div class="col-md-1" id="Legend" style="display:none;">
+        <div id="Keys"></div>
+        <div id="Barometer"></div>
       </div>
       <div class="col-md-11 tabcontent" id="map">
       </div>
     </div>
   </div>
-  <div class="col-md-12 tabcontent" id="graph">  
+  <div class="row">
+    <div class="col-md-12 tabcontent" id="graph">  
+    </div>    
   </div>
   <div class="col-md-12 tabcontent default-tab" id="home">
     <h2> Data Description </h2>

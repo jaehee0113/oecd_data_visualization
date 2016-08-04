@@ -26,7 +26,7 @@ function openTabs(evt, dataType){
     // Declare all variables
     var i, tabcontent, tablinks;
 
-    document.getElementById("Barometer").style.display = "none";
+    document.getElementById("Legend").style.display = "none";
     document.getElementById("home").style.display = "none";
 
     // Get all elements with class="tabcontent" and hide them
@@ -44,7 +44,7 @@ function openTabs(evt, dataType){
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(dataType).style.display = "block";
     if(dataType === "map"){
-    	document.getElementById("Barometer").style.display = "block";
+    	document.getElementById("Legend").style.display = "block";
     }
     evt.currentTarget.className += " active";
 
@@ -55,6 +55,20 @@ function openTabs(evt, dataType){
 function drawGradientLegend(){
 	var w = 140, h = 400;
 	var key = d3.select("#Barometer").append("svg").attr("width", w).attr("height", h);
+	var key2 = d3.select("#Keys").append("svg").attr("width", 140).attr("height", 30).append("g");
+
+
+	key2.append("rect")
+		.attr("width", 20)
+		.attr("height", 20)
+		.style("fill", "rgb(253,253,150)")
+		.attr("transform", "translate(0,5)");
+
+	key2.append('text').text('>1,000,000')
+                .attr('x', 50)
+                .attr('y', 20)
+                .attr('fill', 'black');	
+
 	var legend = key.append("defs")
 				.append("svg:linearGradient")
 					.attr("id", "gradient")
@@ -82,7 +96,7 @@ function drawGradientLegend(){
 		.style("fill", "url(#gradient)")
 		.attr("transform", "translate(0,10)");
 
-	var y = d3.scale.linear().range([300, 0]).domain([19163763,20495]);
+	var y = d3.scale.linear().range([300, 0]).domain([900000,20495]);
 
 	var yAxis = d3.svg.axis().scale(y).orient("right");
 
@@ -101,7 +115,7 @@ function drawGradientLegend(){
 function drawMap(oecd_data, geo_data, year){
 
 	var filtered_oecd_data = oecd_data.filter(function(d){
-		return d['Year'] == year && d['Variable'] == "Inflows of foreign population by nationality" && d['COU'] != 'USA';
+		return d['Year'] == year && d['Variable'] == "Inflows of foreign population by nationality" && (d['COU'] != 'USA');
 	});
 
 	var filtered_oecd_data2 = oecd_data.filter(function(d){
@@ -133,7 +147,7 @@ function drawMap(oecd_data, geo_data, year){
 	
 
 	var linearScale = d3.scale.linear()
-                           .domain([20495,19163763])
+                           .domain([20495,900000])
                            .range([225,178]);
 
     var scaled_aggregated_data = aggregated_data;
@@ -185,14 +199,17 @@ function drawMap(oecd_data, geo_data, year){
                     tooltip.classed('hidden', true);
                 })
                 .style('fill', function(d){	
+
+                	if(d.id == 'USA' || d.id == 'DEU'){
+						return 'rgb(253,253,150)';
+					}
+
 					for(var i = 0; i < scaled_aggregated_data.length; i++){
 						if(d.id == scaled_aggregated_data[i]['key']){
 							return 'rgb(22,' + scaled_aggregated_data[i]['values'] + ',232)';
 						}
 					}
-					if(d.id == 'USA'){
-						return 'rgb(253,253,150)';
-					}
+
 					return 'rgb(221,221,221)';
 				})
 				.style('stroke', 'black')
@@ -222,17 +239,17 @@ function draw(oecd_data){
         D3.js setup code
     */
     var margin = 75,
-        width = 1400 - margin,
-        height = 1200 - margin;
+        width = 800,
+        height = 1200;
 
 	
 	var svg = d3.select("#graph")
 			.append("svg")
-			  .attr("width", width + margin)
+			  .attr("width", width + 1500 + margin)
 			  .attr("height", height + margin)
 			.append('g')
-				.attr("width", width + margin)
-			  .attr("height", height + margin)
+				.attr("width", width - margin)
+			  .attr("height", height - margin)
 			    .attr('class','chart');
 
 	var countries_interested = ['Australia', 'Korea']
@@ -249,7 +266,7 @@ function draw(oecd_data){
 	//works like layer!
 	myChart.addSeries("Country", dimple.plot.line);
 	myChart.addSeries("Country", dimple.plot.scatter);
-	var myLegend = myChart.addLegend(80, 30, 300, 30, "left");
+	var myLegend = myChart.addLegend(300, 30, 900, 30, "left");
 	myChart.draw();
 
 	//Due to the long text, the legend was very difficult to see. As such, I abbreviated full names and changed their x value.
