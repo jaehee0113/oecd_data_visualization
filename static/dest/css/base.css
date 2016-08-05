@@ -80,3 +80,8 @@ div.tooltip {
   top: 40%;
   left: 45%;
   z-index: 3; }
+
+#graph_title {
+  text-anchor: middle;
+  font-size: 30px;
+  font-weight: bold; }

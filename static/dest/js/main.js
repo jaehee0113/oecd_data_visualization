@@ -252,7 +252,12 @@ function draw(oecd_data){
 			  .attr("height", height - margin)
 			    .attr('class','chart');
 
-	var countries_interested = ['Australia', 'Korea']
+	svg.append("text")
+		.attr("x", width / 2 + 300)
+		.attr("y", 30)
+		.attr("id", "graph_title")
+		.text("Top 6 destination for expatriates (2000 ~ 2013)");  
+
 	var filteredData = dimple.filterData(oecd_data, "Variable", "Inflows of foreign population by nationality");
 	var filteredData = dimple.filterData(filteredData, "Country", ['Korea', 'Australia', 'New Zealand', 'United States', 'Canada', 'United Kingdom']);
 	
@@ -266,7 +271,7 @@ function draw(oecd_data){
 	//works like layer!
 	myChart.addSeries("Country", dimple.plot.line);
 	myChart.addSeries("Country", dimple.plot.scatter);
-	var myLegend = myChart.addLegend(300, 30, 900, 30, "left");
+	var myLegend = myChart.addLegend(100, 30, 900, 30, "left");
 	myChart.draw();
 
 	//Due to the long text, the legend was very difficult to see. As such, I abbreviated full names and changed their x value.
