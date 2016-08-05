@@ -261,7 +261,6 @@ function draw(oecd_data){
 	var filteredData = dimple.filterData(oecd_data, "Variable", "Inflows of foreign population by nationality");
 	var filteredData = dimple.filterData(filteredData, "Country", ['Korea', 'Australia', 'New Zealand', 'United States', 'Canada', 'United Kingdom']);
 	
-
 	var myChart = new dimple.chart(svg, filteredData);
 	var x = myChart.addTimeAxis("x", "Year"); 
 	var y = myChart.addMeasureAxis("y", "Value");
