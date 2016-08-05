@@ -20,21 +20,19 @@ I wanted to see top 6 destination for migrants between 2000 and 2013. I clearly 
 
 ![Graph](https://cdn-enterprise.discourse.org/udacity/uploads/default/optimized/3X/a/0/a083ecede68d666f8f7017e8e2407b66cf898e57_1_690x328.png)
 
-Initially, I wanted to give more animation to the map by giving a ‘year’ slider and the shading of map changes accordingly. However, this was not useful because there was no significant difference between years (as shown in a graph). Thus, this plan was not carried out.
+Initially, I wanted to give more animation to the map by giving a ‘year’ slider so that the shading of different parts of the map changes accordingly. However, this was not useful as there was no significant difference between years (as shown in a graph). Thus, this plan was not carried out.
 
-Furthermore, the legends for the map had some problems initially. I aggregated data over ‘country’ and summed up all values. However, the USA and Germany had significantly high number of inflows in total so the colors became almost negligible (so other than USA and Germany, most countries’ color looked extremely similar).
+Furthermore, the legends for the map had some problems initially. I aggregated data over ‘country’ and summed up all values. However, the USA and Germany had significantly high number of inflows in total so the colors became almost negligible (i.e. other than USA and Germany, most countries’ color looked extremely similar).
 
 ![Graph](https://cdn-enterprise.discourse.org/udacity/uploads/default/optimized/3X/e/8/e892933dc0bbaaae471cdb1dfc48e2b8aef96ff0_1_690x364.png)
 
-Therefore, with the feedback received from people, I decided to shade USA and Germany with the color ‘yellow’ and I gave color gradation for data from 20495 and 900000. The color was clearly visible.
+Therefore, with the feedback received from people, I decided to shade USA and Germany with the color ‘yellow’ and I gave color gradation for data from 20495 and 900000. As a result, the color was clearly visible.
 
-
-
-Furthermore, to allow users to see the specific details (i.e. the total number of migrants) I added a tooltip. This was done because even if there are difference in colors, users would want to know more (certainly I want to know more). 
+Furthermore, to allow users to see the specific details (i.e. the total number of migrants) I added a tooltip. This was done because even if there are differences in colors, users would want to know more (certainly I want to know more). 
 
 ###Feedback
 
-I received three constructive feedbacks for my first version via Udacity forum from the following three people:
+I received three constructive feedbacks for my first version via Udacity forum from the following users:
 * Myles
 * georgeliu1998
 * aarthyvallur
@@ -46,7 +44,7 @@ The **feedbacks** were:
 * It would be better to have some statistical measures (such as central tendency) included in the graph.
 * Bubble chart would be better than the line graph for time series.
 
-I have responded to feedbacks accordingly. However, for bubble chart, I still thought that it would be better use line graph so I did not incorporate this advice. Furthermore, I still felt that adding more statistical measures would rather complicate the graphs. So I decided to stick to the simplicity (i.e. addressing what is really interesting to audiences).
+I have responded to feedbacks accordingly. However, for bubble chart, I still think that it would be better to use a line graph so I did not incorporate this advice. Furthermore, I still felt that adding more statistical measures would rather complicate the graphs. So I decided to stick to the simple yet powerful graph (i.e. addressing what is really interesting to audiences).
 
 **Refined version of the graph**
 ![changed_graph](https://s32.postimg.org/wduwirtat/changed_2.png)
