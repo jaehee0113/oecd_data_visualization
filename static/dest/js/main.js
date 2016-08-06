@@ -13,7 +13,7 @@ function loadData(path){
     	}
 
     	draw(oecd_data);
-    	drawMap(oecd_data, geo_data, 2000);
+    	drawMap(oecd_data, geo_data);
 
     	$(".loadingGIF").hide();
     	$(".overlay").hide();
@@ -64,7 +64,7 @@ function drawGradientLegend(){
 		.style("fill", "rgb(253,253,150)")
 		.attr("transform", "translate(0,5)");
 
-	key2.append('text').text('>1,000,000')
+	key2.append('text').text('>10,000,000')
                 .attr('x', 50)
                 .attr('y', 20)
                 .attr('fill', 'black');	
@@ -96,7 +96,7 @@ function drawGradientLegend(){
 		.style("fill", "url(#gradient)")
 		.attr("transform", "translate(0,10)");
 
-	var y = d3.scale.linear().range([300, 0]).domain([900000,20495]);
+	var y = d3.scale.linear().range([300, 0]).domain([10000000,20495]);
 
 	var yAxis = d3.svg.axis().scale(y).orient("right");
 
@@ -112,14 +112,10 @@ function drawGradientLegend(){
 }
 
 //Should display top 10 destination for migrants from year 2000 to 2013! (ANIMATION TO BE INCLUDED!)
-function drawMap(oecd_data, geo_data, year){
+function drawMap(oecd_data, geo_data){
 
 	var filtered_oecd_data = oecd_data.filter(function(d){
-		return d['Year'] == year && d['Variable'] == "Inflows of foreign population by nationality" && (d['COU'] != 'USA');
-	});
-
-	var filtered_oecd_data2 = oecd_data.filter(function(d){
-		return d['Year'] == year && d['Variable'] == "Inflows of foreign population by nationality";
+		return d['VAR'] == "B11";
 	});
 
 	//Aggregate data based on "Country" and sums up all the values!
@@ -143,11 +139,13 @@ function drawMap(oecd_data, geo_data, year){
 				return g.Value;
 			})
 		})
-		.entries(filtered_oecd_data2);
-	
+		.entries(filtered_oecd_data)
+		.sort(function(a,b){
+			return d3.descending(a.values, b.values);
+		});	
 
 	var linearScale = d3.scale.linear()
-                           .domain([20495,900000])
+                           .domain([20495,10000000])
                            .range([225,178]);
 
     var scaled_aggregated_data = aggregated_data;
@@ -200,7 +198,7 @@ function drawMap(oecd_data, geo_data, year){
                 })
                 .style('fill', function(d){	
 
-                	if(d.id == 'USA' || d.id == 'DEU'){
+                	if(d.id == 'USA' || d.id == 'DEU' || d.id == 'ESP'){
 						return 'rgb(253,253,150)';
 					}
 
@@ -242,14 +240,13 @@ function draw(oecd_data){
         width = 800,
         height = 1200;
 
-	
 	var svg = d3.select("#graph")
 			.append("svg")
 			  .attr("width", width + 1500 + margin)
 			  .attr("height", height + margin)
 			.append('g')
-				.attr("width", width - margin)
-			  .attr("height", height - margin)
+				.attr("width", 2375)
+			  	.attr("height", 1275)
 			    .attr('class','chart');
 
 	svg.append("text")
@@ -259,7 +256,7 @@ function draw(oecd_data){
 		.text("Top 6 destination for expatriates (2000 ~ 2013)");  
 
 	var filteredData = dimple.filterData(oecd_data, "Variable", "Inflows of foreign population by nationality");
-	var filteredData = dimple.filterData(filteredData, "Country", ['Korea', 'Australia', 'New Zealand', 'United States', 'Canada', 'United Kingdom']);
+	var filteredData = dimple.filterData(filteredData, "Country", ['Japan', 'Italy', 'Germany', 'United States', 'Spain', 'United Kingdom']);
 	
 	var myChart = new dimple.chart(svg, filteredData);
 	var x = myChart.addTimeAxis("x", "Year"); 
@@ -267,28 +264,16 @@ function draw(oecd_data){
 	x.dateParseFormat = "%Y";
 	x.tickFormat = "%Y";
 	x.timeInterval = 1;	
+	y.title = "Total Immigrants";
 	//works like layer!
 	myChart.addSeries("Country", dimple.plot.line);
 	myChart.addSeries("Country", dimple.plot.scatter);
-	var myLegend = myChart.addLegend(100, 30, 900, 30, "left");
+	var myLegend = myChart.addLegend(10, 10, 10, 200, 'left');
 	myChart.draw();
 
 	//Due to the long text, the legend was very difficult to see. As such, I abbreviated full names and changed their x value.
 	myLegend.shapes.selectAll('text').each( function(d){
-		var val = d3.select(this).attr('x');
-		d3.select(this).attr('x', val - 23);
-		if(d.key == "United States"){
-			d3.select(this).text("US");
-		}else if(d.key == "United Kingdom"){
-			d3.select(this).text("UK");
-		}else if(d.key == "Australia"){
-			d3.select(this).text("AUS");
-		}else if(d.key == "New Zealand"){
-			d3.select(this).text("NZ");
-		}else if(d.key == "Korea"){
-			d3.select(this).text("KOR");
-		}else if(d.key == "Canada"){
-			d3.select(this).text("CAN");
-		}
+		var val = d3.select(this).attr('y');
+		d3.select(this).attr('y', val *1.15);
 	});
 }
