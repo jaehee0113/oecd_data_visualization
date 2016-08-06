@@ -47,10 +47,10 @@ The **feedbacks** were:
 I have responded to feedbacks accordingly. However, for bubble chart, I still think that it would be better to use a line graph so I did not incorporate this advice. Furthermore, I still felt that adding more statistical measures would rather complicate the graphs. So I decided to stick to the simple yet powerful graph (i.e. addressing what is really interesting to audiences).
 
 **Refined version of the graph**
-![changed_graph](https://s32.postimg.org/m4u5odoet/refined_3.png)
+![changed_graph](https://discussions.udacity.com/uploads/default/original/3X/1/4/1445d6a941de31c2ba008fd64d346251e805f8f7.png)
 
 **Refined version of the map**
-![changed_map](https://s32.postimg.org/7bl0k3ohh/refined_4.png)
+![changed_map](https://cdn-enterprise.discourse.org/udacity/uploads/default/optimized/3X/9/9/9959560dd2d9afa390bd6435aa986a00aba55f91_1_690x394.png)
 
 ###Resources
 
